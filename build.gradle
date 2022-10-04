@@ -1,31 +1,190 @@
-plugins {
-	id 'org.springframework.boot' version '2.7.3'
-	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
-	id 'java'
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'cz.habarta.typescript-generator', name: 'typescript-generator-gradle-plugin', version: '2.36.1070'
+    }
 }
 
-group = 'com.example'
-version = '0.0.1-SNAPSHOT'
+plugins {
+    id 'org.springframework.boot' version '2.6.3'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+//    id 'war'
+
+    // solves the problem with long classpath using JAR instead of classpath on command line
+    // https://plugins.gradle.org/plugin/ua.eshepelyuk.ManifestClasspath
+    id 'ua.eshepelyuk.ManifestClasspath' version '1.0.0'
+}
+
+apply plugin: 'cz.habarta.typescript-generator'
+
+group = 'aeb.fcss-webapi'
 sourceCompatibility = '11'
 
-repositories {
-	mavenCentral()
+ext {
 }
+
+repositories {
+    mavenCentral()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.cloud:spring-cloud-dependencies:2021.0.0'
+    }
+}
+
+jar {
+// do not generate plain.jar
+    enabled = false
+}
+
+bootJar {
+// https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/htmlsingle/#packaging-executable.configuring.main-class
+//	mainClass = 'arsm.MainApplication'
+
+// https://docs.gradle.org/current/dsl/org.gradle.api.tasks.bundling.Jar.html#org.gradle.api.tasks.bundling.Jar:archiveFileName
+    archiveFileName = 'fcss-webapi.jar'
+}
+
+// plain war
+//war {
+//    enabled = true
+//    archiveFileName = 'fcss-webapi.war'
+//}
+
+// war with bootloader
+//bootWar {
+//    enabled = false
+//}
+
+// shared java sources, including aeb.* *.core.*
+sourceSets.main.java.srcDirs += ['sharedj/src/main/java']
+
+// resources in java folder, e.g., mapper xml files
+sourceSets.main.resources { srcDirs += ['src/main/java', 'sharedj/src/main/java']; includes = ['**/*.*'] }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
-    implementation 'com.github.pagehelper:pagehelper-spring-boot-starter:1.4.5'
-	
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	
-	implementation fileTree(dir: 'lib', includes: ['*.jar'])
+    // Spring Boot
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-freemarker'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	
+    // Springdoc (former: Swagger)
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.7'
+//	implementation 'io.springfox:springfox-boot-starter:3.0.0'
+//	implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+
+    // JDBC
+    implementation 'com.baomidou:mybatis-plus-boot-starter:3.5.1'
+    implementation 'com.baomidou:dynamic-datasource-spring-boot-starter:3.5.0'
+
+    // DB Driver
+
+    // Utils
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'org.apache.commons:commons-collections4:4.4'
+    implementation 'org.apache.commons:commons-text:1.9'
+    implementation 'org.apache.commons:commons-compress:1.21'
+    implementation 'org.apache.tika:tika-core:2.4.1'
+    implementation 'commons-io:commons-io:2.11.0'
+    implementation 'com.google.guava:guava:31.1-jre'
+
+    // template engine
+    implementation 'org.apache.velocity:velocity-engine-core:2.3'
+
+
+    // JSON
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.1'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-guava:2.13.1'
+
+    // JWT
+    implementation 'com.auth0:java-jwt:3.18.3'
+
+    // Jasper
+//    implementation 'net.sf.jasperreports:jasperreports:6.18.1'
+//    implementation 'net.sf.jasperreports:jasperreports-fonts:6.18.1'
+//    implementation 'com.lowagie:itext:2.1.7'
+//    implementation 'com.itextpdf:itextpdf:5.5.13'
+
+    // Office, CSV
+    implementation 'org.apache.poi:poi-ooxml:5.2.3'
+    implementation 'com.opencsv:opencsv:5.7.0'
+
+    // Jasypt
+    implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4'
+
+    // Spring Security
+    implementation 'org.springframework.security.oauth:spring-security-oauth2:2.5.2.RELEASE'
+    //implementation 'org.springframework.security:spring-security-web:5.7.1'
+    implementation 'org.springframework.security:spring-security-jwt:1.1.0.RELEASE'
+    implementation 'org.springframework.security:spring-security-crypto'
+    implementation 'org.springframework.security:spring-security-core'
+
+    // sftp
+    implementation 'org.springframework.boot:spring-boot-starter-integration'
+    implementation 'org.springframework.integration:spring-integration-sftp'
+
+    // JMS
+    implementation 'javax.jms:javax.jms-api:2.0.1'
+    implementation 'com.ibm.mq:com.ibm.mq.allclient:9.3.0.0'
+    implementation 'com.ibm.mq:mq-jms-spring-boot-starter:2.7.4'
+    //implementation 'org.springframework.ws:spring-ws-support' // 考慮引用
+
+    // JAXB2
+    // stackoverflow: https://tinyurl.com/yc54ysvc
+    implementation 'javax.xml.bind:jaxb-api:2.3.0'
+    implementation 'javax.activation:activation:1.1'
+    implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.0'
+
+    // SOAP, javax.xml.soap.*, javax.xml.xpath.*
+    // mybatis3 使用javax.xml.xpath等 作解析
+    implementation 'jakarta.xml.ws:jakarta.xml.ws-api:4.0.0'
+    runtimeOnly 'com.sun.xml.ws:jaxws-rt:4.0.0'
+
+    // Downloaded jar
+//    providedRuntime fileTree(dir: 'lib', includes: ['db2jcc4.jar'])
+    implementation fileTree(dir: 'lib', includes: ['*.jar'])
+
+    // Runtime need, but excluded from War
+//    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-tasks.named('test') {
-	useJUnitPlatform()
+generateTypeScript {
+    jsonLibrary = 'jackson2'
+    customTypeMappings = ["java.lang.Long:string", "java.math.BigDecimal:string"]
+    classPatterns = ['fcss.webapi.features.**.dto.**']
+    customTypeNamingFunction = 'function(fullyQualifiedName, simpleName) {' +
+            '    if (fullyQualifiedName.indexOf("$") != -1) {' +
+            '        var parent = fullyQualifiedName.split("$")[0];' +
+            '        var child = fullyQualifiedName.split("$")[1];' +
+            '        var method = child;' +
+            //'        if (method.indexOf("Req") != -1) { method = child.substring(0, method.indexOf("Req") + 3); }'+
+            //'        if (method.indexOf("Res") != -1) { method = child.substring(0, method.indexOf("Res") + 3); }'+
+            '        var parentParts = parent.split(".");' +
+            '        var className = parentParts[parentParts.length-1]; ' +
+            '        var classReName = className.substring(0, className.length - 3); ' +
+            '        return classReName + method;' +
+            '    }' +
+            '} '
+
+//    customTypeNaming = ['fcss.webapi.features.fsd.model.dto.FdataUserDto$User:FdataUserDtoUser1',
+//                        'fcss.webapi.features.fsd.model.dto.TradeUserDto$User:TradeUserDtoUser2']
+//    classes = ['fcss.webapi.features.fsd.model.dto.FdataUserDto$User']
+    // excludeClassPatterns = ["fcss.webapi.features.common.**", "fcss.webapi.features.fsd.**"]
+    outputFile = 'build/api.models.ts'
+    outputKind = 'global'
+    outputFileType = 'implementationFile'
+    namespace = 'Rest';
+}
+
+test {
+    useJUnitPlatform()
 }
