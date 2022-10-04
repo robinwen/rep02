@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <settings>
+        <!-- 開啟緩存, 預設為開啟. 還須在Mapper也指定cache標籤才會真正使用緩存 -->
+        <setting name="cacheEnabled" value="true"/>
+        <!-- 在null時也調用setter, 用於返回Map. V3.2以上適用 -->
+        <setting name="callSettersOnNulls" value="true"/>
+        <setting name="mapUnderscoreToCamelCase" value="false"/>
+        <setting name="jdbcTypeForNull" value="VARCHAR" />
+    </settings>
+
+    <typeAliases>
+        <typeAlias alias="Integer" type="java.lang.Integer"/>
+        <typeAlias alias="Long" type="java.lang.Long"/>
+        <typeAlias alias="Boolean" type="java.lang.Boolean"/>
+        <typeAlias alias="HashMap" type="java.util.HashMap"/>
+        <typeAlias alias="LinkedHashMap" type="java.util.LinkedHashMap"/>
+        <typeAlias alias="ArrayList" type="java.util.ArrayList"/>
+        <typeAlias alias="LinkedList" type="java.util.LinkedList"/>
+        <package name="fcss.domain.fcss.entity"/>
+    </typeAliases>
+
+</configuration>

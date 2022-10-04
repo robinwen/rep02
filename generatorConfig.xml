@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="my" targetRuntime="MyBatis3">
+
+        <!-- 去除生成代碼的註解 -->
+        <commentGenerator>
+            <property name="suppressDate" value="false" />
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+        <!-- 資料庫連線設定 -->
+        <jdbcConnection driverClass="com.ibm.db2.jcc.DB2Driver"
+            connectionURL="jdbc:db2://52.41.121.168:50000/FCSS_DEV:currentSchema=FCSS;" userId="db2inst1" password="V7*8d#4Q2h" />
+
+        <!-- 要產生的model位置，targetProject的值為專案的Source folder -->
+        <javaModelGenerator
+            targetPackage="projectname.vo.mg" targetProject="war02/src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!-- 要產生的MyBatis Mapper位置 -->
+        <sqlMapGenerator
+            targetPackage="projectname.dao.mg" targetProject="war02/src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <!-- 要產生的MyBatis Dao位置 -->
+        <javaClientGenerator
+            targetPackage="projectname.dao.mg" targetProject="war02/src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <!-- 要生成的資料表 -->
+        <table schema="FCSS" tableName="BAS_FUND" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="true"></table>
+        <table schema="FCSS" tableName="BAS_ORG" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="true"></table>
+        <table schema="FCSS" tableName="BAS_TWCA" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="true"></table>
+
+    </context>
+</generatorConfiguration>

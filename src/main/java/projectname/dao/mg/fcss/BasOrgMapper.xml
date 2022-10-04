@@ -1,0 +1,650 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="projectname.dao.mg.fcss.BasOrgMapper">
+  <resultMap id="BaseResultMap" type="projectname.vo.mg.fcss.BasOrg">
+    <id column="BAS_ORG_ID" jdbcType="DECIMAL" property="basOrgId" />
+    <result column="ORG_TYPE" jdbcType="VARCHAR" property="orgType" />
+    <result column="ORG_CODE" jdbcType="VARCHAR" property="orgCode" />
+    <result column="PARENT_ORG_CODE" jdbcType="VARCHAR" property="parentOrgCode" />
+    <result column="ORG_ID_NO" jdbcType="VARCHAR" property="orgIdNo" />
+    <result column="ORG_NAME" jdbcType="VARCHAR" property="orgName" />
+    <result column="ORG_SNAME" jdbcType="VARCHAR" property="orgSname" />
+    <result column="ORG_NAME_EN" jdbcType="VARCHAR" property="orgNameEn" />
+    <result column="ORG_SNAME_EN" jdbcType="VARCHAR" property="orgSnameEn" />
+    <result column="BANK_CODE" jdbcType="VARCHAR" property="bankCode" />
+    <result column="ORG_BIC_CODE" jdbcType="VARCHAR" property="orgBicCode" />
+    <result column="ORG_OWNER_NAME" jdbcType="VARCHAR" property="orgOwnerName" />
+    <result column="ORG_CAPITAL" jdbcType="VARCHAR" property="orgCapital" />
+    <result column="ORG_REG_TEL" jdbcType="VARCHAR" property="orgRegTel" />
+    <result column="ORG_REG_ADDR" jdbcType="VARCHAR" property="orgRegAddr" />
+    <result column="ORG_CONT_ADDR" jdbcType="VARCHAR" property="orgContAddr" />
+    <result column="ORG_FAX" jdbcType="VARCHAR" property="orgFax" />
+    <result column="ORG_URL" jdbcType="VARCHAR" property="orgUrl" />
+    <result column="ORG_CONT_NAME" jdbcType="VARCHAR" property="orgContName" />
+    <result column="ORG_CONT_TEL" jdbcType="VARCHAR" property="orgContTel" />
+    <result column="ORG_STATUS" jdbcType="VARCHAR" property="orgStatus" />
+    <result column="ORGIV_VALID_DATE" jdbcType="VARCHAR" property="orgivValidDate" />
+    <result column="IS_ORGIV_VALID" jdbcType="VARCHAR" property="isOrgivValid" />
+    <result column="BAS_REG_ORG_ID" jdbcType="DECIMAL" property="basRegOrgId" />
+    <result column="IS_AUTO" jdbcType="VARCHAR" property="isAuto" />
+    <result column="AUTO_BY" jdbcType="VARCHAR" property="autoBy" />
+    <result column="REGISTER_CODE" jdbcType="VARCHAR" property="registerCode" />
+    <result column="REGISTER_AT" jdbcType="TIMESTAMP" property="registerAt" />
+    <result column="REVIEW1_AT" jdbcType="TIMESTAMP" property="review1At" />
+    <result column="REVIEW2_AT" jdbcType="TIMESTAMP" property="review2At" />
+    <result column="CREATED_BY" jdbcType="DECIMAL" property="createdBy" />
+    <result column="CREATED_AT" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="UPDATED_BY" jdbcType="DECIMAL" property="updatedBy" />
+    <result column="UPDATED_AT" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    BAS_ORG_ID, ORG_TYPE, ORG_CODE, PARENT_ORG_CODE, ORG_ID_NO, ORG_NAME, ORG_SNAME, 
+    ORG_NAME_EN, ORG_SNAME_EN, BANK_CODE, ORG_BIC_CODE, ORG_OWNER_NAME, ORG_CAPITAL, 
+    ORG_REG_TEL, ORG_REG_ADDR, ORG_CONT_ADDR, ORG_FAX, ORG_URL, ORG_CONT_NAME, ORG_CONT_TEL, 
+    ORG_STATUS, ORGIV_VALID_DATE, IS_ORGIV_VALID, BAS_REG_ORG_ID, IS_AUTO, AUTO_BY, REGISTER_CODE, 
+    REGISTER_AT, REVIEW1_AT, REVIEW2_AT, CREATED_BY, CREATED_AT, UPDATED_BY, UPDATED_AT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from FCSS.BAS_ORG
+    where BAS_ORG_ID = #{basOrgId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from FCSS.BAS_ORG
+    where BAS_ORG_ID = #{basOrgId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="projectname.vo.mg.fcss.BasOrg">
+    insert into FCSS.BAS_ORG (BAS_ORG_ID, ORG_TYPE, ORG_CODE, 
+      PARENT_ORG_CODE, ORG_ID_NO, ORG_NAME, 
+      ORG_SNAME, ORG_NAME_EN, ORG_SNAME_EN, 
+      BANK_CODE, ORG_BIC_CODE, ORG_OWNER_NAME, 
+      ORG_CAPITAL, ORG_REG_TEL, ORG_REG_ADDR, 
+      ORG_CONT_ADDR, ORG_FAX, ORG_URL, 
+      ORG_CONT_NAME, ORG_CONT_TEL, ORG_STATUS, 
+      ORGIV_VALID_DATE, IS_ORGIV_VALID, BAS_REG_ORG_ID, 
+      IS_AUTO, AUTO_BY, REGISTER_CODE, 
+      REGISTER_AT, REVIEW1_AT, REVIEW2_AT, 
+      CREATED_BY, CREATED_AT, UPDATED_BY, 
+      UPDATED_AT)
+    values (#{basOrgId,jdbcType=DECIMAL}, #{orgType,jdbcType=VARCHAR}, #{orgCode,jdbcType=VARCHAR}, 
+      #{parentOrgCode,jdbcType=VARCHAR}, #{orgIdNo,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR}, 
+      #{orgSname,jdbcType=VARCHAR}, #{orgNameEn,jdbcType=VARCHAR}, #{orgSnameEn,jdbcType=VARCHAR}, 
+      #{bankCode,jdbcType=VARCHAR}, #{orgBicCode,jdbcType=VARCHAR}, #{orgOwnerName,jdbcType=VARCHAR}, 
+      #{orgCapital,jdbcType=VARCHAR}, #{orgRegTel,jdbcType=VARCHAR}, #{orgRegAddr,jdbcType=VARCHAR}, 
+      #{orgContAddr,jdbcType=VARCHAR}, #{orgFax,jdbcType=VARCHAR}, #{orgUrl,jdbcType=VARCHAR}, 
+      #{orgContName,jdbcType=VARCHAR}, #{orgContTel,jdbcType=VARCHAR}, #{orgStatus,jdbcType=VARCHAR}, 
+      #{orgivValidDate,jdbcType=VARCHAR}, #{isOrgivValid,jdbcType=VARCHAR}, #{basRegOrgId,jdbcType=DECIMAL}, 
+      #{isAuto,jdbcType=VARCHAR}, #{autoBy,jdbcType=VARCHAR}, #{registerCode,jdbcType=VARCHAR}, 
+      #{registerAt,jdbcType=TIMESTAMP}, #{review1At,jdbcType=TIMESTAMP}, #{review2At,jdbcType=TIMESTAMP}, 
+      #{createdBy,jdbcType=DECIMAL}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=DECIMAL}, 
+      #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="projectname.vo.mg.fcss.BasOrg">
+    insert into FCSS.BAS_ORG
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="basOrgId != null">
+        BAS_ORG_ID,
+      </if>
+      <if test="orgType != null">
+        ORG_TYPE,
+      </if>
+      <if test="orgCode != null">
+        ORG_CODE,
+      </if>
+      <if test="parentOrgCode != null">
+        PARENT_ORG_CODE,
+      </if>
+      <if test="orgIdNo != null">
+        ORG_ID_NO,
+      </if>
+      <if test="orgName != null">
+        ORG_NAME,
+      </if>
+      <if test="orgSname != null">
+        ORG_SNAME,
+      </if>
+      <if test="orgNameEn != null">
+        ORG_NAME_EN,
+      </if>
+      <if test="orgSnameEn != null">
+        ORG_SNAME_EN,
+      </if>
+      <if test="bankCode != null">
+        BANK_CODE,
+      </if>
+      <if test="orgBicCode != null">
+        ORG_BIC_CODE,
+      </if>
+      <if test="orgOwnerName != null">
+        ORG_OWNER_NAME,
+      </if>
+      <if test="orgCapital != null">
+        ORG_CAPITAL,
+      </if>
+      <if test="orgRegTel != null">
+        ORG_REG_TEL,
+      </if>
+      <if test="orgRegAddr != null">
+        ORG_REG_ADDR,
+      </if>
+      <if test="orgContAddr != null">
+        ORG_CONT_ADDR,
+      </if>
+      <if test="orgFax != null">
+        ORG_FAX,
+      </if>
+      <if test="orgUrl != null">
+        ORG_URL,
+      </if>
+      <if test="orgContName != null">
+        ORG_CONT_NAME,
+      </if>
+      <if test="orgContTel != null">
+        ORG_CONT_TEL,
+      </if>
+      <if test="orgStatus != null">
+        ORG_STATUS,
+      </if>
+      <if test="orgivValidDate != null">
+        ORGIV_VALID_DATE,
+      </if>
+      <if test="isOrgivValid != null">
+        IS_ORGIV_VALID,
+      </if>
+      <if test="basRegOrgId != null">
+        BAS_REG_ORG_ID,
+      </if>
+      <if test="isAuto != null">
+        IS_AUTO,
+      </if>
+      <if test="autoBy != null">
+        AUTO_BY,
+      </if>
+      <if test="registerCode != null">
+        REGISTER_CODE,
+      </if>
+      <if test="registerAt != null">
+        REGISTER_AT,
+      </if>
+      <if test="review1At != null">
+        REVIEW1_AT,
+      </if>
+      <if test="review2At != null">
+        REVIEW2_AT,
+      </if>
+      <if test="createdBy != null">
+        CREATED_BY,
+      </if>
+      <if test="createdAt != null">
+        CREATED_AT,
+      </if>
+      <if test="updatedBy != null">
+        UPDATED_BY,
+      </if>
+      <if test="updatedAt != null">
+        UPDATED_AT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="basOrgId != null">
+        #{basOrgId,jdbcType=DECIMAL},
+      </if>
+      <if test="orgType != null">
+        #{orgType,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null">
+        #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentOrgCode != null">
+        #{parentOrgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgIdNo != null">
+        #{orgIdNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null">
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgSname != null">
+        #{orgSname,jdbcType=VARCHAR},
+      </if>
+      <if test="orgNameEn != null">
+        #{orgNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="orgSnameEn != null">
+        #{orgSnameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCode != null">
+        #{bankCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgBicCode != null">
+        #{orgBicCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgOwnerName != null">
+        #{orgOwnerName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCapital != null">
+        #{orgCapital,jdbcType=VARCHAR},
+      </if>
+      <if test="orgRegTel != null">
+        #{orgRegTel,jdbcType=VARCHAR},
+      </if>
+      <if test="orgRegAddr != null">
+        #{orgRegAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="orgContAddr != null">
+        #{orgContAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="orgFax != null">
+        #{orgFax,jdbcType=VARCHAR},
+      </if>
+      <if test="orgUrl != null">
+        #{orgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="orgContName != null">
+        #{orgContName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgContTel != null">
+        #{orgContTel,jdbcType=VARCHAR},
+      </if>
+      <if test="orgStatus != null">
+        #{orgStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="orgivValidDate != null">
+        #{orgivValidDate,jdbcType=VARCHAR},
+      </if>
+      <if test="isOrgivValid != null">
+        #{isOrgivValid,jdbcType=VARCHAR},
+      </if>
+      <if test="basRegOrgId != null">
+        #{basRegOrgId,jdbcType=DECIMAL},
+      </if>
+      <if test="isAuto != null">
+        #{isAuto,jdbcType=VARCHAR},
+      </if>
+      <if test="autoBy != null">
+        #{autoBy,jdbcType=VARCHAR},
+      </if>
+      <if test="registerCode != null">
+        #{registerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="registerAt != null">
+        #{registerAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="review1At != null">
+        #{review1At,jdbcType=TIMESTAMP},
+      </if>
+      <if test="review2At != null">
+        #{review2At,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=DECIMAL},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        #{updatedBy,jdbcType=DECIMAL},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="projectname.vo.mg.fcss.BasOrgExample" resultType="java.lang.Long">
+    select count(*) from FCSS.BAS_ORG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update FCSS.BAS_ORG
+    <set>
+      <if test="row.basOrgId != null">
+        BAS_ORG_ID = #{row.basOrgId,jdbcType=DECIMAL},
+      </if>
+      <if test="row.orgType != null">
+        ORG_TYPE = #{row.orgType,jdbcType=VARCHAR},
+      </if>
+      <if test="row.orgCode != null">
+        ORG_CODE = #{row.orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="row.parentOrgCode != null">
+        PARENT_ORG_CODE = #{row.parentOrgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="row.orgIdNo != null">
+        ORG_ID_NO = #{row.orgIdNo,jdbcType=VARCHAR},
+      </if>
+      <if test="row.orgName != null">
+        ORG_NAME = #{row.orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="row.orgSname != null">
+        ORG_SNAME = #{row.orgSname,jdbcType=VARCHAR},
+      </if>
+      <if test="row.orgNameEn != null">
+        ORG_NAME_EN = #{row.orgNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="row.orgSnameEn != null">
+        ORG_SNAME_EN = #{row.orgSnameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="row.bankCode != null">
+        BANK_CODE = #{row.bankCode,jdbcType=VARCHAR},
+      </if>
+      <if test="row.orgBicCode != null">
+        ORG_BIC_CODE = #{row.orgBicCode,jdbcType=VARCHAR},
+      </if>
+      <if test="row.orgOwnerName != null">
+        ORG_OWNER_NAME = #{row.orgOwnerName,jdbcType=VARCHAR},
+      </if>
+      <if test="row.orgCapital != null">
+        ORG_CAPITAL = #{row.orgCapital,jdbcType=VARCHAR},
+      </if>
+      <if test="row.orgRegTel != null">
+        ORG_REG_TEL = #{row.orgRegTel,jdbcType=VARCHAR},
+      </if>
+      <if test="row.orgRegAddr != null">
+        ORG_REG_ADDR = #{row.orgRegAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="row.orgContAddr != null">
+        ORG_CONT_ADDR = #{row.orgContAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="row.orgFax != null">
+        ORG_FAX = #{row.orgFax,jdbcType=VARCHAR},
+      </if>
+      <if test="row.orgUrl != null">
+        ORG_URL = #{row.orgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="row.orgContName != null">
+        ORG_CONT_NAME = #{row.orgContName,jdbcType=VARCHAR},
+      </if>
+      <if test="row.orgContTel != null">
+        ORG_CONT_TEL = #{row.orgContTel,jdbcType=VARCHAR},
+      </if>
+      <if test="row.orgStatus != null">
+        ORG_STATUS = #{row.orgStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="row.orgivValidDate != null">
+        ORGIV_VALID_DATE = #{row.orgivValidDate,jdbcType=VARCHAR},
+      </if>
+      <if test="row.isOrgivValid != null">
+        IS_ORGIV_VALID = #{row.isOrgivValid,jdbcType=VARCHAR},
+      </if>
+      <if test="row.basRegOrgId != null">
+        BAS_REG_ORG_ID = #{row.basRegOrgId,jdbcType=DECIMAL},
+      </if>
+      <if test="row.isAuto != null">
+        IS_AUTO = #{row.isAuto,jdbcType=VARCHAR},
+      </if>
+      <if test="row.autoBy != null">
+        AUTO_BY = #{row.autoBy,jdbcType=VARCHAR},
+      </if>
+      <if test="row.registerCode != null">
+        REGISTER_CODE = #{row.registerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="row.registerAt != null">
+        REGISTER_AT = #{row.registerAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.review1At != null">
+        REVIEW1_AT = #{row.review1At,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.review2At != null">
+        REVIEW2_AT = #{row.review2At,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.createdBy != null">
+        CREATED_BY = #{row.createdBy,jdbcType=DECIMAL},
+      </if>
+      <if test="row.createdAt != null">
+        CREATED_AT = #{row.createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.updatedBy != null">
+        UPDATED_BY = #{row.updatedBy,jdbcType=DECIMAL},
+      </if>
+      <if test="row.updatedAt != null">
+        UPDATED_AT = #{row.updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update FCSS.BAS_ORG
+    set BAS_ORG_ID = #{row.basOrgId,jdbcType=DECIMAL},
+      ORG_TYPE = #{row.orgType,jdbcType=VARCHAR},
+      ORG_CODE = #{row.orgCode,jdbcType=VARCHAR},
+      PARENT_ORG_CODE = #{row.parentOrgCode,jdbcType=VARCHAR},
+      ORG_ID_NO = #{row.orgIdNo,jdbcType=VARCHAR},
+      ORG_NAME = #{row.orgName,jdbcType=VARCHAR},
+      ORG_SNAME = #{row.orgSname,jdbcType=VARCHAR},
+      ORG_NAME_EN = #{row.orgNameEn,jdbcType=VARCHAR},
+      ORG_SNAME_EN = #{row.orgSnameEn,jdbcType=VARCHAR},
+      BANK_CODE = #{row.bankCode,jdbcType=VARCHAR},
+      ORG_BIC_CODE = #{row.orgBicCode,jdbcType=VARCHAR},
+      ORG_OWNER_NAME = #{row.orgOwnerName,jdbcType=VARCHAR},
+      ORG_CAPITAL = #{row.orgCapital,jdbcType=VARCHAR},
+      ORG_REG_TEL = #{row.orgRegTel,jdbcType=VARCHAR},
+      ORG_REG_ADDR = #{row.orgRegAddr,jdbcType=VARCHAR},
+      ORG_CONT_ADDR = #{row.orgContAddr,jdbcType=VARCHAR},
+      ORG_FAX = #{row.orgFax,jdbcType=VARCHAR},
+      ORG_URL = #{row.orgUrl,jdbcType=VARCHAR},
+      ORG_CONT_NAME = #{row.orgContName,jdbcType=VARCHAR},
+      ORG_CONT_TEL = #{row.orgContTel,jdbcType=VARCHAR},
+      ORG_STATUS = #{row.orgStatus,jdbcType=VARCHAR},
+      ORGIV_VALID_DATE = #{row.orgivValidDate,jdbcType=VARCHAR},
+      IS_ORGIV_VALID = #{row.isOrgivValid,jdbcType=VARCHAR},
+      BAS_REG_ORG_ID = #{row.basRegOrgId,jdbcType=DECIMAL},
+      IS_AUTO = #{row.isAuto,jdbcType=VARCHAR},
+      AUTO_BY = #{row.autoBy,jdbcType=VARCHAR},
+      REGISTER_CODE = #{row.registerCode,jdbcType=VARCHAR},
+      REGISTER_AT = #{row.registerAt,jdbcType=TIMESTAMP},
+      REVIEW1_AT = #{row.review1At,jdbcType=TIMESTAMP},
+      REVIEW2_AT = #{row.review2At,jdbcType=TIMESTAMP},
+      CREATED_BY = #{row.createdBy,jdbcType=DECIMAL},
+      CREATED_AT = #{row.createdAt,jdbcType=TIMESTAMP},
+      UPDATED_BY = #{row.updatedBy,jdbcType=DECIMAL},
+      UPDATED_AT = #{row.updatedAt,jdbcType=TIMESTAMP}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="projectname.vo.mg.fcss.BasOrg">
+    update FCSS.BAS_ORG
+    <set>
+      <if test="orgType != null">
+        ORG_TYPE = #{orgType,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null">
+        ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentOrgCode != null">
+        PARENT_ORG_CODE = #{parentOrgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgIdNo != null">
+        ORG_ID_NO = #{orgIdNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null">
+        ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgSname != null">
+        ORG_SNAME = #{orgSname,jdbcType=VARCHAR},
+      </if>
+      <if test="orgNameEn != null">
+        ORG_NAME_EN = #{orgNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="orgSnameEn != null">
+        ORG_SNAME_EN = #{orgSnameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCode != null">
+        BANK_CODE = #{bankCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgBicCode != null">
+        ORG_BIC_CODE = #{orgBicCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgOwnerName != null">
+        ORG_OWNER_NAME = #{orgOwnerName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCapital != null">
+        ORG_CAPITAL = #{orgCapital,jdbcType=VARCHAR},
+      </if>
+      <if test="orgRegTel != null">
+        ORG_REG_TEL = #{orgRegTel,jdbcType=VARCHAR},
+      </if>
+      <if test="orgRegAddr != null">
+        ORG_REG_ADDR = #{orgRegAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="orgContAddr != null">
+        ORG_CONT_ADDR = #{orgContAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="orgFax != null">
+        ORG_FAX = #{orgFax,jdbcType=VARCHAR},
+      </if>
+      <if test="orgUrl != null">
+        ORG_URL = #{orgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="orgContName != null">
+        ORG_CONT_NAME = #{orgContName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgContTel != null">
+        ORG_CONT_TEL = #{orgContTel,jdbcType=VARCHAR},
+      </if>
+      <if test="orgStatus != null">
+        ORG_STATUS = #{orgStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="orgivValidDate != null">
+        ORGIV_VALID_DATE = #{orgivValidDate,jdbcType=VARCHAR},
+      </if>
+      <if test="isOrgivValid != null">
+        IS_ORGIV_VALID = #{isOrgivValid,jdbcType=VARCHAR},
+      </if>
+      <if test="basRegOrgId != null">
+        BAS_REG_ORG_ID = #{basRegOrgId,jdbcType=DECIMAL},
+      </if>
+      <if test="isAuto != null">
+        IS_AUTO = #{isAuto,jdbcType=VARCHAR},
+      </if>
+      <if test="autoBy != null">
+        AUTO_BY = #{autoBy,jdbcType=VARCHAR},
+      </if>
+      <if test="registerCode != null">
+        REGISTER_CODE = #{registerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="registerAt != null">
+        REGISTER_AT = #{registerAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="review1At != null">
+        REVIEW1_AT = #{review1At,jdbcType=TIMESTAMP},
+      </if>
+      <if test="review2At != null">
+        REVIEW2_AT = #{review2At,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null">
+        CREATED_BY = #{createdBy,jdbcType=DECIMAL},
+      </if>
+      <if test="createdAt != null">
+        CREATED_AT = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        UPDATED_BY = #{updatedBy,jdbcType=DECIMAL},
+      </if>
+      <if test="updatedAt != null">
+        UPDATED_AT = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where BAS_ORG_ID = #{basOrgId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="projectname.vo.mg.fcss.BasOrg">
+    update FCSS.BAS_ORG
+    set ORG_TYPE = #{orgType,jdbcType=VARCHAR},
+      ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      PARENT_ORG_CODE = #{parentOrgCode,jdbcType=VARCHAR},
+      ORG_ID_NO = #{orgIdNo,jdbcType=VARCHAR},
+      ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      ORG_SNAME = #{orgSname,jdbcType=VARCHAR},
+      ORG_NAME_EN = #{orgNameEn,jdbcType=VARCHAR},
+      ORG_SNAME_EN = #{orgSnameEn,jdbcType=VARCHAR},
+      BANK_CODE = #{bankCode,jdbcType=VARCHAR},
+      ORG_BIC_CODE = #{orgBicCode,jdbcType=VARCHAR},
+      ORG_OWNER_NAME = #{orgOwnerName,jdbcType=VARCHAR},
+      ORG_CAPITAL = #{orgCapital,jdbcType=VARCHAR},
+      ORG_REG_TEL = #{orgRegTel,jdbcType=VARCHAR},
+      ORG_REG_ADDR = #{orgRegAddr,jdbcType=VARCHAR},
+      ORG_CONT_ADDR = #{orgContAddr,jdbcType=VARCHAR},
+      ORG_FAX = #{orgFax,jdbcType=VARCHAR},
+      ORG_URL = #{orgUrl,jdbcType=VARCHAR},
+      ORG_CONT_NAME = #{orgContName,jdbcType=VARCHAR},
+      ORG_CONT_TEL = #{orgContTel,jdbcType=VARCHAR},
+      ORG_STATUS = #{orgStatus,jdbcType=VARCHAR},
+      ORGIV_VALID_DATE = #{orgivValidDate,jdbcType=VARCHAR},
+      IS_ORGIV_VALID = #{isOrgivValid,jdbcType=VARCHAR},
+      BAS_REG_ORG_ID = #{basRegOrgId,jdbcType=DECIMAL},
+      IS_AUTO = #{isAuto,jdbcType=VARCHAR},
+      AUTO_BY = #{autoBy,jdbcType=VARCHAR},
+      REGISTER_CODE = #{registerCode,jdbcType=VARCHAR},
+      REGISTER_AT = #{registerAt,jdbcType=TIMESTAMP},
+      REVIEW1_AT = #{review1At,jdbcType=TIMESTAMP},
+      REVIEW2_AT = #{review2At,jdbcType=TIMESTAMP},
+      CREATED_BY = #{createdBy,jdbcType=DECIMAL},
+      CREATED_AT = #{createdAt,jdbcType=TIMESTAMP},
+      UPDATED_BY = #{updatedBy,jdbcType=DECIMAL},
+      UPDATED_AT = #{updatedAt,jdbcType=TIMESTAMP}
+    where BAS_ORG_ID = #{basOrgId,jdbcType=DECIMAL}
+  </update>
+</mapper>

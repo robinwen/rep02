@@ -1,0 +1,159 @@
+server:
+  port: 9000
+  servlet:
+    context-path: /webapi
+    session:
+      tracking-modes: cookie
+      cookie:
+        secure: false
+  forward-headers-strategy: framework
+#  use-forward-headers: true
+  error:
+    include-stacktrace: always
+  http2:
+    enabled: true
+  compression:
+    enabled: true
+  tomcat:
+    accesslog:
+      enabled: true
+      directory: /aplog/fcss/webapi
+      pattern: "%{yyyy-MM-dd HH:mm:ss.SSS}t [%A] %h [%I] %u \"%r\" %s %b \"%{Referer}i\" \"%{User-Agent}i\""
+
+spring:
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+  output:
+    ansi:
+      enabled: always
+  datasource:
+    type: "com.zaxxer.hikari.HikariDataSource"
+    driver-class-name: "com.ibm.db2.jcc.DB2Driver"
+    url: "jdbc:db2://52.41.121.168:50000/FCSS_DEV:currentSchema=FCSS;"
+    username: "db2inst1"
+    password: "V7*8d#4Q2h"
+    hikari:
+      connection-test-query: values current timestamp
+      maximum-pool-size: 5
+
+  mail:
+    default-encoding: UTF-8
+    protocol: smtp
+    host: smtp.xxx
+    port: 25
+    username: "intl@xxx.com"
+    password: "xxx"
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 25MB
+  messages:
+    encoding: UTF-8
+    basename: i18n/msg
+    fallback-to-system-locale: false
+    use-code-as-default-message: false
+  freemarker:
+    suffix: .ftl
+    settings:
+      number_format: computer
+      datetime_format: yyyy/MM/dd HH:mm:ss
+      template_exception_handler: ignore
+      object_wrapper: BeansWrapper(2.3.27, exposeFields=true)
+    request-context-attribute: request
+  # versioning of static resources
+  # @see http://blog.csdn.net/isea533/article/details/50412212
+  web:
+#    pathmatch:
+#          matching-strategy: ant_path_matcher
+    resources:
+      chain:
+        strategy:
+          content:
+            enabled: true
+            paths: /**
+
+springdoc:
+  packagesToScan:
+    - fcss.webapi
+  swagger-ui:
+    display-operation-id: true
+#    defaultModelsExpandDepth: -1
+    operationsSorter: alpha
+    tagsSorter: alpha
+
+mybatis:
+  mapper-locations: classpath*:fcss/domain/**/mapper/*.xml
+  config-location: classpath:mybatis-config.xml
+
+logging:
+  level: { fcss: debug }
+#  config: classpath:log4j2.yml
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 30000
+        readTimeout: 30000
+        loggerLevel: HEADERS
+
+jasypt:
+  encryptor:
+    password: mMNv8XD8jdCUbntpnQAznX9B6wSh5UdM
+    algorithm: PBEWITHHMACSHA512ANDAES_256
+    iv-generator-classname: org.jasypt.iv.RandomIvGenerator
+
+app:
+  env: local
+  name: fcss
+  biz-code: fcss_front
+  ap-code: fcss_web
+  logdir: /aplog/fcss/webapi
+  skin: admin
+  error:
+    include-stacktrace: true
+    enc-stacktrace: false
+
+  storage:
+    default:
+      driver: local
+      root: /apfile/pvt/media
+
+    s3:
+      driver: s3
+      client:
+        access-key: AKIA4O4HJYOJKHWWMHV5
+        secret-key: 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
+        bucket-name: fcss-dev-storage
+        region: us-east-1
+        url: https://fcss-dev-storage.s3.us-east-1.amazonaws.com
+        public-media: pub/media
+        private-media: pvt/media
+        public-sw: pub/sw
+
+jwt:
+  secret: HA6FCEJB
+  bypass: false
+  
+  #sftp
+sftp:
+  server:
+    ip.property: dmz.sftp.server
+    userid.property: dmz.sftp.server.userid
+    pswd.property: dmz.sftp.server.pswd
+    enc_key: dmz.sftp.server.enc_key
+
+mail:
+  service:
+    type: JavaMail
+    #type: MailHunter

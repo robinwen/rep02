@@ -1,0 +1,856 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="projectname.dao.mg.fcss.BasFundMapper">
+  <resultMap id="BaseResultMap" type="projectname.vo.mg.fcss.BasFund">
+    <id column="BAS_FUND_ID" jdbcType="DECIMAL" property="basFundId" />
+    <result column="FUND_CODE" jdbcType="VARCHAR" property="fundCode" />
+    <result column="BAS_ORG_ID" jdbcType="DECIMAL" property="basOrgId" />
+    <result column="VERSION_CODE" jdbcType="VARCHAR" property="versionCode" />
+    <result column="FUND_NAME" jdbcType="VARCHAR" property="fundName" />
+    <result column="FUND_SNAME" jdbcType="VARCHAR" property="fundSname" />
+    <result column="FUND_NAME_EN" jdbcType="VARCHAR" property="fundNameEn" />
+    <result column="FUND_VALID_DATE" jdbcType="VARCHAR" property="fundValidDate" />
+    <result column="RDP_OTC" jdbcType="VARCHAR" property="rdpOtc" />
+    <result column="RDP_VACC_TYPE" jdbcType="VARCHAR" property="rdpVaccType" />
+    <result column="RDP_CYCLE_COUNT" jdbcType="INTEGER" property="rdpCycleCount" />
+    <result column="APL_END_TIME" jdbcType="VARCHAR" property="aplEndTime" />
+    <result column="RDP_END_TIME" jdbcType="VARCHAR" property="rdpEndTime" />
+    <result column="FUND_STATUS" jdbcType="VARCHAR" property="fundStatus" />
+    <result column="TRADE_TYPE_FDATA" jdbcType="VARCHAR" property="tradeTypeFdata" />
+    <result column="TRADE_TYPE" jdbcType="VARCHAR" property="tradeType" />
+    <result column="FUND_ISIN_CODE" jdbcType="VARCHAR" property="fundIsinCode" />
+    <result column="FUND_CURR" jdbcType="VARCHAR" property="fundCurr" />
+    <result column="FUND_ASSET" jdbcType="VARCHAR" property="fundAsset" />
+    <result column="FUND_REG_AREA" jdbcType="VARCHAR" property="fundRegArea" />
+    <result column="FUND_F_DATE" jdbcType="VARCHAR" property="fundFDate" />
+    <result column="RASING_START_DATE" jdbcType="VARCHAR" property="rasingStartDate" />
+    <result column="RASING_END_DATE" jdbcType="VARCHAR" property="rasingEndDate" />
+    <result column="REGULAR_FLAG" jdbcType="VARCHAR" property="regularFlag" />
+    <result column="NET_DOT" jdbcType="INTEGER" property="netDot" />
+    <result column="UNIT_DOT" jdbcType="INTEGER" property="unitDot" />
+    <result column="APPLY_MIN_CASH" jdbcType="DECIMAL" property="applyMinCash" />
+    <result column="APPLY_MIN_CASH_TW" jdbcType="DECIMAL" property="applyMinCashTw" />
+    <result column="REGULAR_MIN_CASH" jdbcType="DECIMAL" property="regularMinCash" />
+    <result column="REGULAR_MIN_CASH_TW" jdbcType="DECIMAL" property="regularMinCashTw" />
+    <result column="REGULAR_LEVEL" jdbcType="DECIMAL" property="regularLevel" />
+    <result column="REGULAR_LEVEL_TW" jdbcType="DECIMAL" property="regularLevelTw" />
+    <result column="IPO_MIN_CASH" jdbcType="DECIMAL" property="ipoMinCash" />
+    <result column="IPO_MIN_CASH_TW" jdbcType="DECIMAL" property="ipoMinCashTw" />
+    <result column="APL_SUM_TYPE" jdbcType="VARCHAR" property="aplSumType" />
+    <result column="RDP_PAY_TYPE" jdbcType="VARCHAR" property="rdpPayType" />
+    <result column="P_FLAG" jdbcType="VARCHAR" property="pFlag" />
+    <result column="SHORT_TERM" jdbcType="INTEGER" property="shortTerm" />
+    <result column="TWD_FUND_FLAG" jdbcType="VARCHAR" property="twdFundFlag" />
+    <result column="APPROVE_INFO" jdbcType="VARCHAR" property="approveInfo" />
+    <result column="EDITED_TYPE" jdbcType="VARCHAR" property="editedType" />
+    <result column="EDITED_AT" jdbcType="TIMESTAMP" property="editedAt" />
+    <result column="BAS_FUND_TEMP_ID" jdbcType="DECIMAL" property="basFundTempId" />
+    <result column="CREATED_BY" jdbcType="DECIMAL" property="createdBy" />
+    <result column="CREATED_AT" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="UPDATED_BY" jdbcType="DECIMAL" property="updatedBy" />
+    <result column="UPDATED_AT" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    BAS_FUND_ID, FUND_CODE, BAS_ORG_ID, VERSION_CODE, FUND_NAME, FUND_SNAME, FUND_NAME_EN, 
+    FUND_VALID_DATE, RDP_OTC, RDP_VACC_TYPE, RDP_CYCLE_COUNT, APL_END_TIME, RDP_END_TIME, 
+    FUND_STATUS, TRADE_TYPE_FDATA, TRADE_TYPE, FUND_ISIN_CODE, FUND_CURR, FUND_ASSET, 
+    FUND_REG_AREA, FUND_F_DATE, RASING_START_DATE, RASING_END_DATE, REGULAR_FLAG, NET_DOT, 
+    UNIT_DOT, APPLY_MIN_CASH, APPLY_MIN_CASH_TW, REGULAR_MIN_CASH, REGULAR_MIN_CASH_TW, 
+    REGULAR_LEVEL, REGULAR_LEVEL_TW, IPO_MIN_CASH, IPO_MIN_CASH_TW, APL_SUM_TYPE, RDP_PAY_TYPE, 
+    P_FLAG, SHORT_TERM, TWD_FUND_FLAG, APPROVE_INFO, EDITED_TYPE, EDITED_AT, BAS_FUND_TEMP_ID, 
+    CREATED_BY, CREATED_AT, UPDATED_BY, UPDATED_AT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from FCSS.BAS_FUND
+    where BAS_FUND_ID = #{basFundId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from FCSS.BAS_FUND
+    where BAS_FUND_ID = #{basFundId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="projectname.vo.mg.fcss.BasFund">
+    insert into FCSS.BAS_FUND (BAS_FUND_ID, FUND_CODE, BAS_ORG_ID, 
+      VERSION_CODE, FUND_NAME, FUND_SNAME, 
+      FUND_NAME_EN, FUND_VALID_DATE, RDP_OTC, 
+      RDP_VACC_TYPE, RDP_CYCLE_COUNT, APL_END_TIME, 
+      RDP_END_TIME, FUND_STATUS, TRADE_TYPE_FDATA, 
+      TRADE_TYPE, FUND_ISIN_CODE, FUND_CURR, 
+      FUND_ASSET, FUND_REG_AREA, FUND_F_DATE, 
+      RASING_START_DATE, RASING_END_DATE, REGULAR_FLAG, 
+      NET_DOT, UNIT_DOT, APPLY_MIN_CASH, 
+      APPLY_MIN_CASH_TW, REGULAR_MIN_CASH, REGULAR_MIN_CASH_TW, 
+      REGULAR_LEVEL, REGULAR_LEVEL_TW, IPO_MIN_CASH, 
+      IPO_MIN_CASH_TW, APL_SUM_TYPE, RDP_PAY_TYPE, 
+      P_FLAG, SHORT_TERM, TWD_FUND_FLAG, 
+      APPROVE_INFO, EDITED_TYPE, EDITED_AT, 
+      BAS_FUND_TEMP_ID, CREATED_BY, CREATED_AT, 
+      UPDATED_BY, UPDATED_AT)
+    values (#{basFundId,jdbcType=DECIMAL}, #{fundCode,jdbcType=VARCHAR}, #{basOrgId,jdbcType=DECIMAL}, 
+      #{versionCode,jdbcType=VARCHAR}, #{fundName,jdbcType=VARCHAR}, #{fundSname,jdbcType=VARCHAR}, 
+      #{fundNameEn,jdbcType=VARCHAR}, #{fundValidDate,jdbcType=VARCHAR}, #{rdpOtc,jdbcType=VARCHAR}, 
+      #{rdpVaccType,jdbcType=VARCHAR}, #{rdpCycleCount,jdbcType=INTEGER}, #{aplEndTime,jdbcType=VARCHAR}, 
+      #{rdpEndTime,jdbcType=VARCHAR}, #{fundStatus,jdbcType=VARCHAR}, #{tradeTypeFdata,jdbcType=VARCHAR}, 
+      #{tradeType,jdbcType=VARCHAR}, #{fundIsinCode,jdbcType=VARCHAR}, #{fundCurr,jdbcType=VARCHAR}, 
+      #{fundAsset,jdbcType=VARCHAR}, #{fundRegArea,jdbcType=VARCHAR}, #{fundFDate,jdbcType=VARCHAR}, 
+      #{rasingStartDate,jdbcType=VARCHAR}, #{rasingEndDate,jdbcType=VARCHAR}, #{regularFlag,jdbcType=VARCHAR}, 
+      #{netDot,jdbcType=INTEGER}, #{unitDot,jdbcType=INTEGER}, #{applyMinCash,jdbcType=DECIMAL}, 
+      #{applyMinCashTw,jdbcType=DECIMAL}, #{regularMinCash,jdbcType=DECIMAL}, #{regularMinCashTw,jdbcType=DECIMAL}, 
+      #{regularLevel,jdbcType=DECIMAL}, #{regularLevelTw,jdbcType=DECIMAL}, #{ipoMinCash,jdbcType=DECIMAL}, 
+      #{ipoMinCashTw,jdbcType=DECIMAL}, #{aplSumType,jdbcType=VARCHAR}, #{rdpPayType,jdbcType=VARCHAR}, 
+      #{pFlag,jdbcType=VARCHAR}, #{shortTerm,jdbcType=INTEGER}, #{twdFundFlag,jdbcType=VARCHAR}, 
+      #{approveInfo,jdbcType=VARCHAR}, #{editedType,jdbcType=VARCHAR}, #{editedAt,jdbcType=TIMESTAMP}, 
+      #{basFundTempId,jdbcType=DECIMAL}, #{createdBy,jdbcType=DECIMAL}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedBy,jdbcType=DECIMAL}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="projectname.vo.mg.fcss.BasFund">
+    insert into FCSS.BAS_FUND
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="basFundId != null">
+        BAS_FUND_ID,
+      </if>
+      <if test="fundCode != null">
+        FUND_CODE,
+      </if>
+      <if test="basOrgId != null">
+        BAS_ORG_ID,
+      </if>
+      <if test="versionCode != null">
+        VERSION_CODE,
+      </if>
+      <if test="fundName != null">
+        FUND_NAME,
+      </if>
+      <if test="fundSname != null">
+        FUND_SNAME,
+      </if>
+      <if test="fundNameEn != null">
+        FUND_NAME_EN,
+      </if>
+      <if test="fundValidDate != null">
+        FUND_VALID_DATE,
+      </if>
+      <if test="rdpOtc != null">
+        RDP_OTC,
+      </if>
+      <if test="rdpVaccType != null">
+        RDP_VACC_TYPE,
+      </if>
+      <if test="rdpCycleCount != null">
+        RDP_CYCLE_COUNT,
+      </if>
+      <if test="aplEndTime != null">
+        APL_END_TIME,
+      </if>
+      <if test="rdpEndTime != null">
+        RDP_END_TIME,
+      </if>
+      <if test="fundStatus != null">
+        FUND_STATUS,
+      </if>
+      <if test="tradeTypeFdata != null">
+        TRADE_TYPE_FDATA,
+      </if>
+      <if test="tradeType != null">
+        TRADE_TYPE,
+      </if>
+      <if test="fundIsinCode != null">
+        FUND_ISIN_CODE,
+      </if>
+      <if test="fundCurr != null">
+        FUND_CURR,
+      </if>
+      <if test="fundAsset != null">
+        FUND_ASSET,
+      </if>
+      <if test="fundRegArea != null">
+        FUND_REG_AREA,
+      </if>
+      <if test="fundFDate != null">
+        FUND_F_DATE,
+      </if>
+      <if test="rasingStartDate != null">
+        RASING_START_DATE,
+      </if>
+      <if test="rasingEndDate != null">
+        RASING_END_DATE,
+      </if>
+      <if test="regularFlag != null">
+        REGULAR_FLAG,
+      </if>
+      <if test="netDot != null">
+        NET_DOT,
+      </if>
+      <if test="unitDot != null">
+        UNIT_DOT,
+      </if>
+      <if test="applyMinCash != null">
+        APPLY_MIN_CASH,
+      </if>
+      <if test="applyMinCashTw != null">
+        APPLY_MIN_CASH_TW,
+      </if>
+      <if test="regularMinCash != null">
+        REGULAR_MIN_CASH,
+      </if>
+      <if test="regularMinCashTw != null">
+        REGULAR_MIN_CASH_TW,
+      </if>
+      <if test="regularLevel != null">
+        REGULAR_LEVEL,
+      </if>
+      <if test="regularLevelTw != null">
+        REGULAR_LEVEL_TW,
+      </if>
+      <if test="ipoMinCash != null">
+        IPO_MIN_CASH,
+      </if>
+      <if test="ipoMinCashTw != null">
+        IPO_MIN_CASH_TW,
+      </if>
+      <if test="aplSumType != null">
+        APL_SUM_TYPE,
+      </if>
+      <if test="rdpPayType != null">
+        RDP_PAY_TYPE,
+      </if>
+      <if test="pFlag != null">
+        P_FLAG,
+      </if>
+      <if test="shortTerm != null">
+        SHORT_TERM,
+      </if>
+      <if test="twdFundFlag != null">
+        TWD_FUND_FLAG,
+      </if>
+      <if test="approveInfo != null">
+        APPROVE_INFO,
+      </if>
+      <if test="editedType != null">
+        EDITED_TYPE,
+      </if>
+      <if test="editedAt != null">
+        EDITED_AT,
+      </if>
+      <if test="basFundTempId != null">
+        BAS_FUND_TEMP_ID,
+      </if>
+      <if test="createdBy != null">
+        CREATED_BY,
+      </if>
+      <if test="createdAt != null">
+        CREATED_AT,
+      </if>
+      <if test="updatedBy != null">
+        UPDATED_BY,
+      </if>
+      <if test="updatedAt != null">
+        UPDATED_AT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="basFundId != null">
+        #{basFundId,jdbcType=DECIMAL},
+      </if>
+      <if test="fundCode != null">
+        #{fundCode,jdbcType=VARCHAR},
+      </if>
+      <if test="basOrgId != null">
+        #{basOrgId,jdbcType=DECIMAL},
+      </if>
+      <if test="versionCode != null">
+        #{versionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fundName != null">
+        #{fundName,jdbcType=VARCHAR},
+      </if>
+      <if test="fundSname != null">
+        #{fundSname,jdbcType=VARCHAR},
+      </if>
+      <if test="fundNameEn != null">
+        #{fundNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="fundValidDate != null">
+        #{fundValidDate,jdbcType=VARCHAR},
+      </if>
+      <if test="rdpOtc != null">
+        #{rdpOtc,jdbcType=VARCHAR},
+      </if>
+      <if test="rdpVaccType != null">
+        #{rdpVaccType,jdbcType=VARCHAR},
+      </if>
+      <if test="rdpCycleCount != null">
+        #{rdpCycleCount,jdbcType=INTEGER},
+      </if>
+      <if test="aplEndTime != null">
+        #{aplEndTime,jdbcType=VARCHAR},
+      </if>
+      <if test="rdpEndTime != null">
+        #{rdpEndTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fundStatus != null">
+        #{fundStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeTypeFdata != null">
+        #{tradeTypeFdata,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeType != null">
+        #{tradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="fundIsinCode != null">
+        #{fundIsinCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fundCurr != null">
+        #{fundCurr,jdbcType=VARCHAR},
+      </if>
+      <if test="fundAsset != null">
+        #{fundAsset,jdbcType=VARCHAR},
+      </if>
+      <if test="fundRegArea != null">
+        #{fundRegArea,jdbcType=VARCHAR},
+      </if>
+      <if test="fundFDate != null">
+        #{fundFDate,jdbcType=VARCHAR},
+      </if>
+      <if test="rasingStartDate != null">
+        #{rasingStartDate,jdbcType=VARCHAR},
+      </if>
+      <if test="rasingEndDate != null">
+        #{rasingEndDate,jdbcType=VARCHAR},
+      </if>
+      <if test="regularFlag != null">
+        #{regularFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="netDot != null">
+        #{netDot,jdbcType=INTEGER},
+      </if>
+      <if test="unitDot != null">
+        #{unitDot,jdbcType=INTEGER},
+      </if>
+      <if test="applyMinCash != null">
+        #{applyMinCash,jdbcType=DECIMAL},
+      </if>
+      <if test="applyMinCashTw != null">
+        #{applyMinCashTw,jdbcType=DECIMAL},
+      </if>
+      <if test="regularMinCash != null">
+        #{regularMinCash,jdbcType=DECIMAL},
+      </if>
+      <if test="regularMinCashTw != null">
+        #{regularMinCashTw,jdbcType=DECIMAL},
+      </if>
+      <if test="regularLevel != null">
+        #{regularLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="regularLevelTw != null">
+        #{regularLevelTw,jdbcType=DECIMAL},
+      </if>
+      <if test="ipoMinCash != null">
+        #{ipoMinCash,jdbcType=DECIMAL},
+      </if>
+      <if test="ipoMinCashTw != null">
+        #{ipoMinCashTw,jdbcType=DECIMAL},
+      </if>
+      <if test="aplSumType != null">
+        #{aplSumType,jdbcType=VARCHAR},
+      </if>
+      <if test="rdpPayType != null">
+        #{rdpPayType,jdbcType=VARCHAR},
+      </if>
+      <if test="pFlag != null">
+        #{pFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="shortTerm != null">
+        #{shortTerm,jdbcType=INTEGER},
+      </if>
+      <if test="twdFundFlag != null">
+        #{twdFundFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="approveInfo != null">
+        #{approveInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="editedType != null">
+        #{editedType,jdbcType=VARCHAR},
+      </if>
+      <if test="editedAt != null">
+        #{editedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="basFundTempId != null">
+        #{basFundTempId,jdbcType=DECIMAL},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=DECIMAL},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        #{updatedBy,jdbcType=DECIMAL},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="projectname.vo.mg.fcss.BasFundExample" resultType="java.lang.Long">
+    select count(*) from FCSS.BAS_FUND
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update FCSS.BAS_FUND
+    <set>
+      <if test="row.basFundId != null">
+        BAS_FUND_ID = #{row.basFundId,jdbcType=DECIMAL},
+      </if>
+      <if test="row.fundCode != null">
+        FUND_CODE = #{row.fundCode,jdbcType=VARCHAR},
+      </if>
+      <if test="row.basOrgId != null">
+        BAS_ORG_ID = #{row.basOrgId,jdbcType=DECIMAL},
+      </if>
+      <if test="row.versionCode != null">
+        VERSION_CODE = #{row.versionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="row.fundName != null">
+        FUND_NAME = #{row.fundName,jdbcType=VARCHAR},
+      </if>
+      <if test="row.fundSname != null">
+        FUND_SNAME = #{row.fundSname,jdbcType=VARCHAR},
+      </if>
+      <if test="row.fundNameEn != null">
+        FUND_NAME_EN = #{row.fundNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="row.fundValidDate != null">
+        FUND_VALID_DATE = #{row.fundValidDate,jdbcType=VARCHAR},
+      </if>
+      <if test="row.rdpOtc != null">
+        RDP_OTC = #{row.rdpOtc,jdbcType=VARCHAR},
+      </if>
+      <if test="row.rdpVaccType != null">
+        RDP_VACC_TYPE = #{row.rdpVaccType,jdbcType=VARCHAR},
+      </if>
+      <if test="row.rdpCycleCount != null">
+        RDP_CYCLE_COUNT = #{row.rdpCycleCount,jdbcType=INTEGER},
+      </if>
+      <if test="row.aplEndTime != null">
+        APL_END_TIME = #{row.aplEndTime,jdbcType=VARCHAR},
+      </if>
+      <if test="row.rdpEndTime != null">
+        RDP_END_TIME = #{row.rdpEndTime,jdbcType=VARCHAR},
+      </if>
+      <if test="row.fundStatus != null">
+        FUND_STATUS = #{row.fundStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="row.tradeTypeFdata != null">
+        TRADE_TYPE_FDATA = #{row.tradeTypeFdata,jdbcType=VARCHAR},
+      </if>
+      <if test="row.tradeType != null">
+        TRADE_TYPE = #{row.tradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="row.fundIsinCode != null">
+        FUND_ISIN_CODE = #{row.fundIsinCode,jdbcType=VARCHAR},
+      </if>
+      <if test="row.fundCurr != null">
+        FUND_CURR = #{row.fundCurr,jdbcType=VARCHAR},
+      </if>
+      <if test="row.fundAsset != null">
+        FUND_ASSET = #{row.fundAsset,jdbcType=VARCHAR},
+      </if>
+      <if test="row.fundRegArea != null">
+        FUND_REG_AREA = #{row.fundRegArea,jdbcType=VARCHAR},
+      </if>
+      <if test="row.fundFDate != null">
+        FUND_F_DATE = #{row.fundFDate,jdbcType=VARCHAR},
+      </if>
+      <if test="row.rasingStartDate != null">
+        RASING_START_DATE = #{row.rasingStartDate,jdbcType=VARCHAR},
+      </if>
+      <if test="row.rasingEndDate != null">
+        RASING_END_DATE = #{row.rasingEndDate,jdbcType=VARCHAR},
+      </if>
+      <if test="row.regularFlag != null">
+        REGULAR_FLAG = #{row.regularFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="row.netDot != null">
+        NET_DOT = #{row.netDot,jdbcType=INTEGER},
+      </if>
+      <if test="row.unitDot != null">
+        UNIT_DOT = #{row.unitDot,jdbcType=INTEGER},
+      </if>
+      <if test="row.applyMinCash != null">
+        APPLY_MIN_CASH = #{row.applyMinCash,jdbcType=DECIMAL},
+      </if>
+      <if test="row.applyMinCashTw != null">
+        APPLY_MIN_CASH_TW = #{row.applyMinCashTw,jdbcType=DECIMAL},
+      </if>
+      <if test="row.regularMinCash != null">
+        REGULAR_MIN_CASH = #{row.regularMinCash,jdbcType=DECIMAL},
+      </if>
+      <if test="row.regularMinCashTw != null">
+        REGULAR_MIN_CASH_TW = #{row.regularMinCashTw,jdbcType=DECIMAL},
+      </if>
+      <if test="row.regularLevel != null">
+        REGULAR_LEVEL = #{row.regularLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="row.regularLevelTw != null">
+        REGULAR_LEVEL_TW = #{row.regularLevelTw,jdbcType=DECIMAL},
+      </if>
+      <if test="row.ipoMinCash != null">
+        IPO_MIN_CASH = #{row.ipoMinCash,jdbcType=DECIMAL},
+      </if>
+      <if test="row.ipoMinCashTw != null">
+        IPO_MIN_CASH_TW = #{row.ipoMinCashTw,jdbcType=DECIMAL},
+      </if>
+      <if test="row.aplSumType != null">
+        APL_SUM_TYPE = #{row.aplSumType,jdbcType=VARCHAR},
+      </if>
+      <if test="row.rdpPayType != null">
+        RDP_PAY_TYPE = #{row.rdpPayType,jdbcType=VARCHAR},
+      </if>
+      <if test="row.pFlag != null">
+        P_FLAG = #{row.pFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="row.shortTerm != null">
+        SHORT_TERM = #{row.shortTerm,jdbcType=INTEGER},
+      </if>
+      <if test="row.twdFundFlag != null">
+        TWD_FUND_FLAG = #{row.twdFundFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="row.approveInfo != null">
+        APPROVE_INFO = #{row.approveInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="row.editedType != null">
+        EDITED_TYPE = #{row.editedType,jdbcType=VARCHAR},
+      </if>
+      <if test="row.editedAt != null">
+        EDITED_AT = #{row.editedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.basFundTempId != null">
+        BAS_FUND_TEMP_ID = #{row.basFundTempId,jdbcType=DECIMAL},
+      </if>
+      <if test="row.createdBy != null">
+        CREATED_BY = #{row.createdBy,jdbcType=DECIMAL},
+      </if>
+      <if test="row.createdAt != null">
+        CREATED_AT = #{row.createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.updatedBy != null">
+        UPDATED_BY = #{row.updatedBy,jdbcType=DECIMAL},
+      </if>
+      <if test="row.updatedAt != null">
+        UPDATED_AT = #{row.updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update FCSS.BAS_FUND
+    set BAS_FUND_ID = #{row.basFundId,jdbcType=DECIMAL},
+      FUND_CODE = #{row.fundCode,jdbcType=VARCHAR},
+      BAS_ORG_ID = #{row.basOrgId,jdbcType=DECIMAL},
+      VERSION_CODE = #{row.versionCode,jdbcType=VARCHAR},
+      FUND_NAME = #{row.fundName,jdbcType=VARCHAR},
+      FUND_SNAME = #{row.fundSname,jdbcType=VARCHAR},
+      FUND_NAME_EN = #{row.fundNameEn,jdbcType=VARCHAR},
+      FUND_VALID_DATE = #{row.fundValidDate,jdbcType=VARCHAR},
+      RDP_OTC = #{row.rdpOtc,jdbcType=VARCHAR},
+      RDP_VACC_TYPE = #{row.rdpVaccType,jdbcType=VARCHAR},
+      RDP_CYCLE_COUNT = #{row.rdpCycleCount,jdbcType=INTEGER},
+      APL_END_TIME = #{row.aplEndTime,jdbcType=VARCHAR},
+      RDP_END_TIME = #{row.rdpEndTime,jdbcType=VARCHAR},
+      FUND_STATUS = #{row.fundStatus,jdbcType=VARCHAR},
+      TRADE_TYPE_FDATA = #{row.tradeTypeFdata,jdbcType=VARCHAR},
+      TRADE_TYPE = #{row.tradeType,jdbcType=VARCHAR},
+      FUND_ISIN_CODE = #{row.fundIsinCode,jdbcType=VARCHAR},
+      FUND_CURR = #{row.fundCurr,jdbcType=VARCHAR},
+      FUND_ASSET = #{row.fundAsset,jdbcType=VARCHAR},
+      FUND_REG_AREA = #{row.fundRegArea,jdbcType=VARCHAR},
+      FUND_F_DATE = #{row.fundFDate,jdbcType=VARCHAR},
+      RASING_START_DATE = #{row.rasingStartDate,jdbcType=VARCHAR},
+      RASING_END_DATE = #{row.rasingEndDate,jdbcType=VARCHAR},
+      REGULAR_FLAG = #{row.regularFlag,jdbcType=VARCHAR},
+      NET_DOT = #{row.netDot,jdbcType=INTEGER},
+      UNIT_DOT = #{row.unitDot,jdbcType=INTEGER},
+      APPLY_MIN_CASH = #{row.applyMinCash,jdbcType=DECIMAL},
+      APPLY_MIN_CASH_TW = #{row.applyMinCashTw,jdbcType=DECIMAL},
+      REGULAR_MIN_CASH = #{row.regularMinCash,jdbcType=DECIMAL},
+      REGULAR_MIN_CASH_TW = #{row.regularMinCashTw,jdbcType=DECIMAL},
+      REGULAR_LEVEL = #{row.regularLevel,jdbcType=DECIMAL},
+      REGULAR_LEVEL_TW = #{row.regularLevelTw,jdbcType=DECIMAL},
+      IPO_MIN_CASH = #{row.ipoMinCash,jdbcType=DECIMAL},
+      IPO_MIN_CASH_TW = #{row.ipoMinCashTw,jdbcType=DECIMAL},
+      APL_SUM_TYPE = #{row.aplSumType,jdbcType=VARCHAR},
+      RDP_PAY_TYPE = #{row.rdpPayType,jdbcType=VARCHAR},
+      P_FLAG = #{row.pFlag,jdbcType=VARCHAR},
+      SHORT_TERM = #{row.shortTerm,jdbcType=INTEGER},
+      TWD_FUND_FLAG = #{row.twdFundFlag,jdbcType=VARCHAR},
+      APPROVE_INFO = #{row.approveInfo,jdbcType=VARCHAR},
+      EDITED_TYPE = #{row.editedType,jdbcType=VARCHAR},
+      EDITED_AT = #{row.editedAt,jdbcType=TIMESTAMP},
+      BAS_FUND_TEMP_ID = #{row.basFundTempId,jdbcType=DECIMAL},
+      CREATED_BY = #{row.createdBy,jdbcType=DECIMAL},
+      CREATED_AT = #{row.createdAt,jdbcType=TIMESTAMP},
+      UPDATED_BY = #{row.updatedBy,jdbcType=DECIMAL},
+      UPDATED_AT = #{row.updatedAt,jdbcType=TIMESTAMP}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="projectname.vo.mg.fcss.BasFund">
+    update FCSS.BAS_FUND
+    <set>
+      <if test="fundCode != null">
+        FUND_CODE = #{fundCode,jdbcType=VARCHAR},
+      </if>
+      <if test="basOrgId != null">
+        BAS_ORG_ID = #{basOrgId,jdbcType=DECIMAL},
+      </if>
+      <if test="versionCode != null">
+        VERSION_CODE = #{versionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fundName != null">
+        FUND_NAME = #{fundName,jdbcType=VARCHAR},
+      </if>
+      <if test="fundSname != null">
+        FUND_SNAME = #{fundSname,jdbcType=VARCHAR},
+      </if>
+      <if test="fundNameEn != null">
+        FUND_NAME_EN = #{fundNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="fundValidDate != null">
+        FUND_VALID_DATE = #{fundValidDate,jdbcType=VARCHAR},
+      </if>
+      <if test="rdpOtc != null">
+        RDP_OTC = #{rdpOtc,jdbcType=VARCHAR},
+      </if>
+      <if test="rdpVaccType != null">
+        RDP_VACC_TYPE = #{rdpVaccType,jdbcType=VARCHAR},
+      </if>
+      <if test="rdpCycleCount != null">
+        RDP_CYCLE_COUNT = #{rdpCycleCount,jdbcType=INTEGER},
+      </if>
+      <if test="aplEndTime != null">
+        APL_END_TIME = #{aplEndTime,jdbcType=VARCHAR},
+      </if>
+      <if test="rdpEndTime != null">
+        RDP_END_TIME = #{rdpEndTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fundStatus != null">
+        FUND_STATUS = #{fundStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeTypeFdata != null">
+        TRADE_TYPE_FDATA = #{tradeTypeFdata,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeType != null">
+        TRADE_TYPE = #{tradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="fundIsinCode != null">
+        FUND_ISIN_CODE = #{fundIsinCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fundCurr != null">
+        FUND_CURR = #{fundCurr,jdbcType=VARCHAR},
+      </if>
+      <if test="fundAsset != null">
+        FUND_ASSET = #{fundAsset,jdbcType=VARCHAR},
+      </if>
+      <if test="fundRegArea != null">
+        FUND_REG_AREA = #{fundRegArea,jdbcType=VARCHAR},
+      </if>
+      <if test="fundFDate != null">
+        FUND_F_DATE = #{fundFDate,jdbcType=VARCHAR},
+      </if>
+      <if test="rasingStartDate != null">
+        RASING_START_DATE = #{rasingStartDate,jdbcType=VARCHAR},
+      </if>
+      <if test="rasingEndDate != null">
+        RASING_END_DATE = #{rasingEndDate,jdbcType=VARCHAR},
+      </if>
+      <if test="regularFlag != null">
+        REGULAR_FLAG = #{regularFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="netDot != null">
+        NET_DOT = #{netDot,jdbcType=INTEGER},
+      </if>
+      <if test="unitDot != null">
+        UNIT_DOT = #{unitDot,jdbcType=INTEGER},
+      </if>
+      <if test="applyMinCash != null">
+        APPLY_MIN_CASH = #{applyMinCash,jdbcType=DECIMAL},
+      </if>
+      <if test="applyMinCashTw != null">
+        APPLY_MIN_CASH_TW = #{applyMinCashTw,jdbcType=DECIMAL},
+      </if>
+      <if test="regularMinCash != null">
+        REGULAR_MIN_CASH = #{regularMinCash,jdbcType=DECIMAL},
+      </if>
+      <if test="regularMinCashTw != null">
+        REGULAR_MIN_CASH_TW = #{regularMinCashTw,jdbcType=DECIMAL},
+      </if>
+      <if test="regularLevel != null">
+        REGULAR_LEVEL = #{regularLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="regularLevelTw != null">
+        REGULAR_LEVEL_TW = #{regularLevelTw,jdbcType=DECIMAL},
+      </if>
+      <if test="ipoMinCash != null">
+        IPO_MIN_CASH = #{ipoMinCash,jdbcType=DECIMAL},
+      </if>
+      <if test="ipoMinCashTw != null">
+        IPO_MIN_CASH_TW = #{ipoMinCashTw,jdbcType=DECIMAL},
+      </if>
+      <if test="aplSumType != null">
+        APL_SUM_TYPE = #{aplSumType,jdbcType=VARCHAR},
+      </if>
+      <if test="rdpPayType != null">
+        RDP_PAY_TYPE = #{rdpPayType,jdbcType=VARCHAR},
+      </if>
+      <if test="pFlag != null">
+        P_FLAG = #{pFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="shortTerm != null">
+        SHORT_TERM = #{shortTerm,jdbcType=INTEGER},
+      </if>
+      <if test="twdFundFlag != null">
+        TWD_FUND_FLAG = #{twdFundFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="approveInfo != null">
+        APPROVE_INFO = #{approveInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="editedType != null">
+        EDITED_TYPE = #{editedType,jdbcType=VARCHAR},
+      </if>
+      <if test="editedAt != null">
+        EDITED_AT = #{editedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="basFundTempId != null">
+        BAS_FUND_TEMP_ID = #{basFundTempId,jdbcType=DECIMAL},
+      </if>
+      <if test="createdBy != null">
+        CREATED_BY = #{createdBy,jdbcType=DECIMAL},
+      </if>
+      <if test="createdAt != null">
+        CREATED_AT = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        UPDATED_BY = #{updatedBy,jdbcType=DECIMAL},
+      </if>
+      <if test="updatedAt != null">
+        UPDATED_AT = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where BAS_FUND_ID = #{basFundId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="projectname.vo.mg.fcss.BasFund">
+    update FCSS.BAS_FUND
+    set FUND_CODE = #{fundCode,jdbcType=VARCHAR},
+      BAS_ORG_ID = #{basOrgId,jdbcType=DECIMAL},
+      VERSION_CODE = #{versionCode,jdbcType=VARCHAR},
+      FUND_NAME = #{fundName,jdbcType=VARCHAR},
+      FUND_SNAME = #{fundSname,jdbcType=VARCHAR},
+      FUND_NAME_EN = #{fundNameEn,jdbcType=VARCHAR},
+      FUND_VALID_DATE = #{fundValidDate,jdbcType=VARCHAR},
+      RDP_OTC = #{rdpOtc,jdbcType=VARCHAR},
+      RDP_VACC_TYPE = #{rdpVaccType,jdbcType=VARCHAR},
+      RDP_CYCLE_COUNT = #{rdpCycleCount,jdbcType=INTEGER},
+      APL_END_TIME = #{aplEndTime,jdbcType=VARCHAR},
+      RDP_END_TIME = #{rdpEndTime,jdbcType=VARCHAR},
+      FUND_STATUS = #{fundStatus,jdbcType=VARCHAR},
+      TRADE_TYPE_FDATA = #{tradeTypeFdata,jdbcType=VARCHAR},
+      TRADE_TYPE = #{tradeType,jdbcType=VARCHAR},
+      FUND_ISIN_CODE = #{fundIsinCode,jdbcType=VARCHAR},
+      FUND_CURR = #{fundCurr,jdbcType=VARCHAR},
+      FUND_ASSET = #{fundAsset,jdbcType=VARCHAR},
+      FUND_REG_AREA = #{fundRegArea,jdbcType=VARCHAR},
+      FUND_F_DATE = #{fundFDate,jdbcType=VARCHAR},
+      RASING_START_DATE = #{rasingStartDate,jdbcType=VARCHAR},
+      RASING_END_DATE = #{rasingEndDate,jdbcType=VARCHAR},
+      REGULAR_FLAG = #{regularFlag,jdbcType=VARCHAR},
+      NET_DOT = #{netDot,jdbcType=INTEGER},
+      UNIT_DOT = #{unitDot,jdbcType=INTEGER},
+      APPLY_MIN_CASH = #{applyMinCash,jdbcType=DECIMAL},
+      APPLY_MIN_CASH_TW = #{applyMinCashTw,jdbcType=DECIMAL},
+      REGULAR_MIN_CASH = #{regularMinCash,jdbcType=DECIMAL},
+      REGULAR_MIN_CASH_TW = #{regularMinCashTw,jdbcType=DECIMAL},
+      REGULAR_LEVEL = #{regularLevel,jdbcType=DECIMAL},
+      REGULAR_LEVEL_TW = #{regularLevelTw,jdbcType=DECIMAL},
+      IPO_MIN_CASH = #{ipoMinCash,jdbcType=DECIMAL},
+      IPO_MIN_CASH_TW = #{ipoMinCashTw,jdbcType=DECIMAL},
+      APL_SUM_TYPE = #{aplSumType,jdbcType=VARCHAR},
+      RDP_PAY_TYPE = #{rdpPayType,jdbcType=VARCHAR},
+      P_FLAG = #{pFlag,jdbcType=VARCHAR},
+      SHORT_TERM = #{shortTerm,jdbcType=INTEGER},
+      TWD_FUND_FLAG = #{twdFundFlag,jdbcType=VARCHAR},
+      APPROVE_INFO = #{approveInfo,jdbcType=VARCHAR},
+      EDITED_TYPE = #{editedType,jdbcType=VARCHAR},
+      EDITED_AT = #{editedAt,jdbcType=TIMESTAMP},
+      BAS_FUND_TEMP_ID = #{basFundTempId,jdbcType=DECIMAL},
+      CREATED_BY = #{createdBy,jdbcType=DECIMAL},
+      CREATED_AT = #{createdAt,jdbcType=TIMESTAMP},
+      UPDATED_BY = #{updatedBy,jdbcType=DECIMAL},
+      UPDATED_AT = #{updatedAt,jdbcType=TIMESTAMP}
+    where BAS_FUND_ID = #{basFundId,jdbcType=DECIMAL}
+  </update>
+</mapper>
